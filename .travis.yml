@@ -1,20 +1,17 @@
 language: ruby
 bundler_args: --without "oracle sqlserver"
-addons:
-  postgresql: 9.6
 
 before_script:
   - cp test/connections/databases.ci.yml test/connections/databases.yml
-  - bundle exec rake mysql:build_database postgresql:build_database sqlite:build_database
+  - bundle exec rake mysql:build_database postgresql:build_database
 
 script:
   - "bundle exec rake postgresql:test"
-  - "bundle exec rake sqlite:test"
   - "bundle exec rake mysql:test"
 
 rvm:
-  - 2.5.5
-  - 2.6.3
+  - 2.5.6
+  - 2.6.4
 
 env:
   global:
@@ -22,3 +19,4 @@ env:
 
 services:
   - postgresql
+  - mysql
